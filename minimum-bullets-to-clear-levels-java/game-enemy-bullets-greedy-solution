@@ -1,0 +1,38 @@
+class Result {
+
+    public static int superHero(List<List<Integer>> power, List<List<Integer>> bullets) {
+
+        int n = power.size();
+        int m = power.get(0).size();
+
+        int required = 0;
+        int current = 0;
+
+        for(int i = 0; i < n; i++) {
+
+            int bestPower = Integer.MAX_VALUE;
+            int bestBullet = 0;
+
+            for(int j = 0; j < m; j++) {
+
+                int p = power.get(i).get(j);
+                int b = bullets.get(i).get(j);
+
+                if(p - b < bestPower - bestBullet){
+                    bestPower = p;
+                    bestBullet = b;
+                }
+            }
+
+            if(current < bestPower){
+                required += (bestPower - current);
+                current = bestPower;
+            }
+
+            current = current - bestPower + bestBullet;
+        }
+
+        return required;
+    }
+
+}
